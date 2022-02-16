@@ -17,7 +17,10 @@ Then alter your homeserver configuration, adding to your `modules` configuration
 modules:
   - module: tchap_username_email.TchapUsernameEmail
     config:
-      # TODO: Complete this section with an example for your module
+      # Whether to try to extract full name and organisation from the email address. The
+      # resulting display name will have the form "John Doe [Acme]".
+      # Optional, defaults to "true".
+      extract_from_email: true
 ```
 
 
@@ -73,14 +76,4 @@ Synapse developers (assuming a Unix-like shell):
  6. Push the tag.
     ```shell
     git push origin tag v$version
-    ```
-
- 7. If applicable:
-    Create a *release*, based on the tag you just pushed, on GitHub or GitLab.
-
- 8. If applicable:
-    Create a source distribution and upload it to PyPI:
-    ```shell
-    python -m build
-    twine upload dist/tchap_username_email-$version*
     ```
