@@ -27,11 +27,10 @@ class TchapUsernameEmailConfig:
 
 class TchapUsernameEmail:
     def __init__(self, config: TchapUsernameEmailConfig, api: ModuleApi):
-        # Keep a reference to the config and Module API
-        self._api = api
+        # Keep a reference to the config.
         self._config = config
 
-        self._api.register_password_auth_provider_callbacks(
+        api.register_password_auth_provider_callbacks(
             get_display_name_for_registration=self.extract_displayname_from_email,
         )
 
