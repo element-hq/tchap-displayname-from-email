@@ -31,7 +31,7 @@ class TchapUsernameEmail:
         self._config = config
 
         api.register_password_auth_provider_callbacks(
-            get_display_name_for_registration=self.extract_displayname_from_email,
+            get_displayname_for_registration=self.extract_displayname_from_email,
         )
 
     @staticmethod
