@@ -5,6 +5,6 @@ build-backend = "setuptools.build_meta"
 [tool.isort]
 profile = "black"
 known_first_party = [
-    "tchap_username_email",
+    "tchap_displayname_email",
     "tests"
 ]

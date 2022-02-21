@@ -8,7 +8,7 @@
 set -e
 
 files=(
-  "tchap_username_email"
+  "tchap_displayname_email"
   "tests"
 )
 
