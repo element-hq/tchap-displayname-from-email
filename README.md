@@ -7,7 +7,7 @@ A Synapse module used by Tchap to derive a display name from a new user's email 
 
 From the virtual environment that you use for Synapse, install this module with:
 ```shell
-pip install path/to/tchap-username-from-email
+pip install path/to/tchap-displayname-from-email
 ```
 (If you run into issues, you may need to upgrade `pip` first, e.g. by running
 `pip install --upgrade pip`)
@@ -15,7 +15,7 @@ pip install path/to/tchap-username-from-email
 Then alter your homeserver configuration, adding to your `modules` configuration:
 ```yaml
 modules:
-  - module: tchap_username_email.TchapUsernameEmail
+  - module: tchap_displayname_email.TchapDisplaynameEmail
     config:
       # Whether to try to extract full name and organisation from the email address. The
       # resulting display name will have the form "John Doe [Acme]".

@@ -21,12 +21,12 @@ AUTH_TYPE_EMAIL = "m.login.email.identity"
 
 
 @attr.s(auto_attribs=True, frozen=True)
-class TchapUsernameEmailConfig:
+class TchapDisplaynameEmailConfig:
     extract_from_email: bool
 
 
-class TchapUsernameEmail:
-    def __init__(self, config: TchapUsernameEmailConfig, api: ModuleApi):
+class TchapDisplaynameEmail:
+    def __init__(self, config: TchapDisplaynameEmailConfig, api: ModuleApi):
         # Keep a reference to the config.
         self._config = config
 
@@ -35,9 +35,9 @@ class TchapUsernameEmail:
         )
 
     @staticmethod
-    def parse_config(config: Dict[str, Any]) -> TchapUsernameEmailConfig:
+    def parse_config(config: Dict[str, Any]) -> TchapDisplaynameEmailConfig:
         extract_from_email = config.get("extract_from_email", True)
-        return TchapUsernameEmailConfig(
+        return TchapDisplaynameEmailConfig(
             extract_from_email=extract_from_email,
         )
 
@@ -54,7 +54,7 @@ class TchapUsernameEmail:
             params: The parameters of the registration request.
 
         Returns:
-            The username if an email address could be found in the UIA results, None
+            The display name if an email address could be found in the UIA results, None
             otherwise. If an email is present, and `extract_from_email` is True, then
             the email address is used as is.
         """

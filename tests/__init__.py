@@ -16,10 +16,10 @@ from unittest.mock import Mock
 
 from synapse.module_api import ModuleApi
 
-from tchap_username_email import TchapUsernameEmail
+from tchap_displayname_email import TchapDisplaynameEmail
 
 
-def create_module(raw_config: Optional[Dict[str, Any]] = None) -> TchapUsernameEmail:
+def create_module(raw_config: Optional[Dict[str, Any]] = None) -> TchapDisplaynameEmail:
     # Create a mock based on the ModuleApi spec, but override some mocked functions
     # because some capabilities are needed for running the tests.
     module_api = Mock(spec=ModuleApi)
@@ -28,6 +28,6 @@ def create_module(raw_config: Optional[Dict[str, Any]] = None) -> TchapUsernameE
     if raw_config is None:
         raw_config = {}
 
-    config = TchapUsernameEmail.parse_config(raw_config)
+    config = TchapDisplaynameEmail.parse_config(raw_config)
 
-    return TchapUsernameEmail(config, module_api)
+    return TchapDisplaynameEmail(config, module_api)

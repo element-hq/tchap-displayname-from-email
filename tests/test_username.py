@@ -15,11 +15,11 @@ from typing import Optional
 
 import aiounittest
 
-from tchap_username_email import AUTH_TYPE_EMAIL, TchapUsernameEmail
+from tchap_displayname_email import AUTH_TYPE_EMAIL, TchapDisplaynameEmail
 from tests import create_module
 
 
-class UsernameTestCase(aiounittest.AsyncTestCase):
+class DisplaynameTestCase(aiounittest.AsyncTestCase):
     async def test_no_email(self) -> None:
         """Tests that the module returns None if there's no email provided."""
         module = create_module()
@@ -31,7 +31,7 @@ class UsernameTestCase(aiounittest.AsyncTestCase):
         provided.
         """
         module = create_module()
-        res = await self._get_username(module, "foo.bar@matrix.org")
+        res = await self._get_displayname(module, "foo.bar@matrix.org")
         self.assertEqual(res, "Foo Bar [Tchap Admin]")
 
     async def test_gouv_fr(self) -> None:
@@ -39,7 +39,7 @@ class UsernameTestCase(aiounittest.AsyncTestCase):
         email is provided.
         """
         module = create_module()
-        res = await self._get_username(module, "foo.bar@gouv.fr")
+        res = await self._get_displayname(module, "foo.bar@gouv.fr")
         self.assertEqual(res, "Foo Bar [Gouv]")
 
     async def test_gouv_fr_sub(self) -> None:
@@ -47,7 +47,7 @@ class UsernameTestCase(aiounittest.AsyncTestCase):
         email is provided.
         """
         module = create_module()
-        res = await self._get_username(module, "foo.bar@education.gouv.fr")
+        res = await self._get_displayname(module, "foo.bar@education.gouv.fr")
         self.assertEqual(res, "Foo Bar [Education]")
 
     async def test_other_domain(self) -> None:
@@ -55,7 +55,7 @@ class UsernameTestCase(aiounittest.AsyncTestCase):
         is provided.
         """
         module = create_module()
-        res = await self._get_username(module, "foo.bar@nikan.com")
+        res = await self._get_displayname(module, "foo.bar@nikan.com")
         self.assertEqual(res, "Foo Bar [Nikan]")
 
     async def test_hyphen(self) -> None:
@@ -63,13 +63,13 @@ class UsernameTestCase(aiounittest.AsyncTestCase):
         a hyphen.
         """
         module = create_module()
-        res = await self._get_username(module, "foo-bar.baz@nikan.com")
+        res = await self._get_displayname(module, "foo-bar.baz@nikan.com")
         self.assertEqual(res, "Foo-Bar Baz [Nikan]")
 
     async def test_no_last_name(self) -> None:
         """Tests that the module doesn't always expect a last name to be provided."""
         module = create_module()
-        res = await self._get_username(module, "foo@nikan.com")
+        res = await self._get_displayname(module, "foo@nikan.com")
         self.assertEqual(res, "Foo [Nikan]")
 
     async def test_not_extract(self) -> None:
@@ -77,12 +77,12 @@ class UsernameTestCase(aiounittest.AsyncTestCase):
         to do so.
         """
         module = create_module({"extract_from_email": False})
-        res = await self._get_username(module, "foo@nikan.com")
+        res = await self._get_displayname(module, "foo@nikan.com")
         self.assertEqual(res, "foo@nikan.com")
 
-    async def _get_username(
+    async def _get_displayname(
         self,
-        module: TchapUsernameEmail,
+        module: TchapDisplaynameEmail,
         email: Optional[str],
     ) -> Optional[str]:
         """Calls the extract_displayname_from_email method on the given module using the
